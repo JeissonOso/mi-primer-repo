@@ -55,3 +55,6 @@ Ejecuta el siguiente comando en la terminal para construir las imágenes Docker 
 ```bash
 docker-compose up --build
 
+----
+FastApi: http://127.0.0.1:8989/docs
+
