@@ -1,0 +1,22 @@
+[tool.uv]
+name = "fastapi_project"
+version = "0.1.0"
+description = "Proyecto FastAPI con Uvicorn utilizando UV para la gestión de dependencias."
+authors = ["Tu Nombre <tu.email@example.com>"]
+
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "joblib",
+    "pandas",
+    "scikit-learn",
+    "uvicorn"
+]
+
+[build-system]
+requires = ["uv"]
+build-backend = "uv.build"
+
+
+
+

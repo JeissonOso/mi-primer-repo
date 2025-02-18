@@ -1,41 +1,25 @@
-version: "3.10"
+version: '3.8'
 
 services:
-  #----------------------------------------------------
-  # 1. JupyterLab con UV
-  #----------------------------------------------------
-  jupyter_service:
-    build:
-      context: ./jupyter-lab-custom
-    container_name: "jupyter_uv"
+  fastapi:
+    build: ./fastapi
+    container_name: fastapi_app
+    ports:
+      - "8989:8989"
+    volumes:
+      - shared-models:/app/models  # Usar volumen compartido para los modelos
+    depends_on:
+      - jupyterlab
+
+  jupyterlab:
+    build: ./jupyterlab
+    container_name: jupyter_lab
+    volumes:
+      - shared-data:/data  # Volumen compartido para datos
+      - shared-models:/models  # Volumen compartido para modelos
     ports:
       - "8888:8888"
-    volumes:
-      # 1) Montar la carpeta entera de notebooks y Dockerfile
-      - ./jupyter-lab-custom:/home/jovyan/work
 
-      # 2) Montar carpeta data (si la usas en el notebook)
-      - ./data:/home/jovyan/work/data
-
-      # NO montamos subcarpeta 'models' por separado,
-      # porque ya estará dentro de jupyter-lab-custom/models
-      # y accesible en "/home/jovyan/work/models"
-
-    restart: always
-
-  #----------------------------------------------------
-  # 2. API FastAPI con UV
-  #----------------------------------------------------
-  api_service:
-    build:
-      context: ./api
-    container_name: "penguin_api_uv"
-    ports:
-      - "8989:8000"
-
-    volumes:
-      # Montamos la subcarpeta 'models' para la API
-      - ./jupyter-lab-custom/models:/app/models
-
-    restart: always
-
+volumes:
+  shared-models:  # Volumen para almacenar modelos
+  shared-data:  # Volumen para almacenar datos

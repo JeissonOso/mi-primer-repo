@@ -1,0 +1,22 @@
+[tool.uv]
+name = "ml_project"
+version = "0.1.0"
+description = "Proyecto de modelo ML usando JupyterLab y UV"
+authors = ["Tu Nombre <tu.email@example.com>"]
+
+dependencies = [
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "joblib",
+    "jupyterlab",
+    "uvicorn"
+]
+
+[build-system]
+requires = ["uv"]
+build-backend = "uv.build"
+
+
+
+
