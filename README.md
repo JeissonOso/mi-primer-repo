@@ -82,3 +82,15 @@ JupyterLab: http://127.0.0.1:8888/lab
 API FastAPI: http://127.0.0.1:8989/docs
 
 
+Realizar Inferencias con la API
+Usa el endpoint \texttt{/predict} para enviar una solicitud POST. Por ejemplo, para el modelo "Random forests", el cuerpo de la solicitud podría ser:
+
+{
+  "island": "Biscoe",
+  "culmen_length_mm": 50.0,
+  "culmen_depth_mm": 18.5,
+  "flipper_length_mm": 200.0,
+  "body_mass_g": 4000.0,
+  "sex": "MALE"
+}
+
