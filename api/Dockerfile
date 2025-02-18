@@ -28,23 +28,3 @@ EXPOSE 8000
 CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
-
-
-
-# Dockerfile (para la API)
-FROM python:3.10-slim
-
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir uv
-
-WORKDIR /app
-COPY pyproject.toml .
-
-# Aquí la clave: usamos '--system' para no usar virtualenv
-RUN uv pip install . --system
-
-COPY main.py .
-EXPOSE 8000
-
-CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
