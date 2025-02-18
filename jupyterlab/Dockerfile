@@ -1,4 +1,4 @@
-# Usar una imagen base de Python 3.10
+# Dockerfile para JupyterLab
 FROM python:3.10
 
 # Instalar UV
@@ -10,13 +10,13 @@ WORKDIR /notebooks
 # Crear el entorno virtual usando UV
 RUN uv venv .venv
 
-# Copiar el archivo de configuración de UV (pyproject.toml) al contenedor
+# Copiar el archivo de configuración (pyproject.toml) al contenedor
 COPY pyproject.toml /notebooks/pyproject.toml
 
-# Instalar las dependencias definidas en pyproject.toml mediante UV
-RUN uv install
+# Instalar las dependencias para JupyterLab
+RUN uv pip install jupyterlab pandas numpy scikit-learn joblib uvicorn
 
-# Copiar archivos del proyecto
+# Copiar archivos del proyecto (por ejemplo, notebooks, datos, etc.)
 COPY Modelo_ML.ipynb /notebooks
 COPY data /notebooks/data
 
@@ -26,5 +26,5 @@ ENV PATH="/notebooks/.venv/bin:$PATH"
 # Exponer el puerto para JupyterLab
 EXPOSE 8888
 
-# Comando de inicio de JupyterLab
+# Comando de inicio para JupyterLab
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
